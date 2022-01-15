@@ -1,4 +1,4 @@
-﻿namespace Term_3
+﻿namespace FirstTask
 {
     public class Array
     {

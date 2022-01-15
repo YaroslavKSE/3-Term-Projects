@@ -20,7 +20,7 @@ namespace FirstTask
             _pointer += 1;
         }
 
-        private string Pop()
+        public string Pop()
         {
             if (_pointer == 0)
             {
@@ -32,7 +32,7 @@ namespace FirstTask
             return returnValue;
         }
 
-        private string Seek()
+        public string Seek()
         {
             if (_pointer == 0)
             {
