@@ -11,7 +11,7 @@
             return _tailPointer;
         }
 
-        private void Insert(int index, int element)
+        public void Insert(int index, int element)
         {
             if (_tailPointer >= _array.Length)
             {
