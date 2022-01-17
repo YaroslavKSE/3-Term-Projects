@@ -27,7 +27,7 @@ List<string> Token(string expression)
             stack.Push(element);
         }
 
-        if (element.Length == 2)
+        if (element.Length > 2)
         {
             element.Split(new string[] { }, StringSplitOptions.None);
             foreach (var i in element)
