@@ -33,5 +33,16 @@ namespace FirstTask
             _pointer--;
             return value;
         }
+
+        public string ToString()
+        {
+            return string.Join(' ', _array);
+        }
+        
+        public bool IsEmpty()
+        {
+            return _pointer == 0;
+        }
+        
     }
 }
