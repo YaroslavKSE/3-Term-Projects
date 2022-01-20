@@ -9,7 +9,7 @@ namespace FirstTask
 
         private string[] _array = new string[Capacity];
 
-        private int _pointer;
+        private int _pointer = 0;
 
         public void Push(string value)
         {
@@ -29,7 +29,7 @@ namespace FirstTask
                 return null;
             }
 
-            var value = _array[_pointer];
+            var value = _array[_pointer - 1];
             _pointer--;
             return value;
         }
@@ -43,6 +43,15 @@ namespace FirstTask
         {
             return _pointer == 0;
         }
-        
+
+        public string GetLast()
+        {
+            if (_pointer == 0)
+            {
+                return null;
+            }
+
+            return _array[_pointer - 1];
+        }
     }
 }
