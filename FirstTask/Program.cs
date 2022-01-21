@@ -103,7 +103,7 @@ String Calculate(Queue postfixTokenList)
         {
             var secondNum = buffer.Pull();
             var firstNum = buffer.Pull();
-            buffer.Push(counter(firstNum, secondNum, token));
+            buffer.Push(count(firstNum, secondNum, token));
         }
     }
     var result = buffer.Pull();
@@ -142,7 +142,7 @@ string combineNumber(Queue queue)
     return result;
 }
 
-string counter(string firstNum, string secondNum, string oper)
+string count(string firstNum, string secondNum, string oper)
 {
     double result = 0;
     switch (oper)
