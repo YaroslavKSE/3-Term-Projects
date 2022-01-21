@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using Stack = FirstTask.Stack;
 using Queue = FirstTask.Queue;
 
@@ -9,7 +10,7 @@ while(true)
     var input = Console.ReadLine();
     var tokens = Token(input);
     var postfixTokens = InfixToPostfix(tokens);
-    var result = Calculate(postfixTokens);
+    var result = Calculate(postfixTokens); 
     Console.Write("Here is your result: ");
     Console.WriteLine(result);
     Console.Write("Calculate again?[Yes/No]:");
@@ -24,7 +25,7 @@ Queue Token(string expression)
     var b = new Queue();
     for (int i = 0; i < expression.Length; i++)
     {
-        if (char.IsDigit(expression[i]))
+        if (char.IsDigit(expression[i]) || expression[i] == ',' || expression[i] == '.')
         {
             b.Enqueue(expression[i].ToString());
         }
@@ -57,7 +58,8 @@ Queue InfixToPostfix(Queue tokenized)
     while (!tokenized.IsEmpty())
     {
         var token = tokenized.Dequeue();
-        if (int.TryParse(token, out _))
+        bool checkIfNumber = double.TryParse(token, NumberStyles.Any, CultureInfo.InvariantCulture, out _);
+        if (checkIfNumber)
         {
             output.Enqueue(token);
         }
@@ -103,7 +105,7 @@ String Calculate(Queue postfixTokenList)
     while (!postfixTokenList.IsEmpty())
     {
         var token = postfixTokenList.Dequeue();
-        if (int.TryParse(token, out int _))
+        if (double.TryParse(token, out  _))
         {
             buffer.Push(token);
         }
@@ -178,4 +180,3 @@ string count(string firstNum, string secondNum, string oper)
 
     return result.ToString();
 }
-
