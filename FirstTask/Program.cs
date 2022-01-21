@@ -1,17 +1,23 @@
-﻿using System;
-using System.Linq;
+using System;
 using Stack = FirstTask.Stack;
 using Queue = FirstTask.Queue;
 
 
-var input = Console.ReadLine();
-var tokens = Token(input);
-Console.WriteLine(tokens.ToString());
-var postfixTokens = InfixToPostfix(tokens);
-Console.WriteLine(postfixTokens.ToString());
-var result = Calculate(postfixTokens);
-Console.WriteLine(result);
-
+while(true)
+{
+    Console.Write("Enter expression:");
+    var input = Console.ReadLine();
+    var tokens = Token(input);
+    var postfixTokens = InfixToPostfix(tokens);
+    var result = Calculate(postfixTokens);
+    Console.Write("Here is your result: ");
+    Console.WriteLine(result);
+    Console.Write("Calculate again?[Yes/No]:");
+    var input2 = Console.ReadLine();
+    if (input2 == "No")
+        break;
+    
+}
 Queue Token(string expression)
 {
     var tokenized = new Queue();
@@ -37,8 +43,8 @@ Queue Token(string expression)
                 tokenized.Enqueue(combineNumber(b));
             tokenized.Enqueue(expression[i].ToString());
         }
-        
     }
+
     if (!b.IsEmpty())
         tokenized.Enqueue(combineNumber(b));
     return tokenized;
@@ -55,15 +61,16 @@ Queue InfixToPostfix(Queue tokenized)
         {
             output.Enqueue(token);
         }
-        else if(isOperator(token))
+        else if (isOperator(token))
         {
-            while (!operatorStack.IsEmpty() && checkPriority(operatorStack.GetLast()) > checkPriority(token) || 
+            while (!operatorStack.IsEmpty() && checkPriority(operatorStack.GetLast()) > checkPriority(token) ||
                    checkPriority(operatorStack.GetLast()) == checkPriority(token) && token != "^")
             {
                 if (operatorStack.GetLast() != "(")
                     output.Enqueue(operatorStack.Pull());
                 else break;
             }
+
             operatorStack.Push(token);
         }
         else if (token == "(")
@@ -85,6 +92,7 @@ Queue InfixToPostfix(Queue tokenized)
     {
         output.Enqueue(operatorStack.Pull());
     }
+
     return output;
 }
 
@@ -106,6 +114,7 @@ String Calculate(Queue postfixTokenList)
             buffer.Push(count(firstNum, secondNum, token));
         }
     }
+
     var result = buffer.Pull();
     return result;
 }
@@ -139,6 +148,7 @@ string combineNumber(Queue queue)
     {
         result = result + queue.Dequeue();
     }
+
     return result;
 }
 
@@ -165,5 +175,7 @@ string count(string firstNum, string secondNum, string oper)
         default:
             throw new Exception("Illegal operation");
     }
+
     return result.ToString();
 }
+
